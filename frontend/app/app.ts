@@ -56,11 +56,8 @@ export class AppComponent {
 
                 let options = new RequestOptions({ headers: headers });
 
-                this.http.get('/database/products', options)
-                .map(res => <string[]> res.json())
-                .subscribe(
-                     prods => this.products = prods,
-                     error =>  console.log(error));
+                this.http.get('http://localhost:41080/api/wordService/getBook', options)
+                    .subscribe((res:Response) => this.doSomething(res));
 
             },
             error=>{
@@ -68,6 +65,10 @@ export class AppComponent {
             }
         );
 
+    }
+
+    private doSomething(res:Response) {
+        var a= 2;
     }
 
     private handleError (error: Response) {
