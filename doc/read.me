@@ -1,0 +1,55 @@
+1) Произвести деплой драйвера hsqldb
+2) Создать новый datasource не XA.
+Name: DataSourceEx
+JNDI Name: java:jboss/datasources/DataSourceEx
+драйвер выбрать из списка
+3) в  добавить строки persistence.xml
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+                http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+    <persistence-unit name="DataSourceEx" transaction-type="JTA">
+        <jta-data-source>java:jboss/datasources/DataSourceEx</jta-data-source>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
+
+4) Вставить EntityManager как
+   @PersistenceContext(unitName = "DataSourceEx")
+   private EntityManager em;
+
+
+5) добавляем в tandalone/configuration/standalone.xml
+<security-domain name="xdb-security" cache-type="default">
+    <authentication>
+        <login-module code="Database" flag="required">
+            <module-option name="dsJndiName" value="java:jboss/datasources/DataSourceEx"/>
+            <module-option name="principalsQuery" value="select PASSWORD from USERS where USERNAME =?"/>
+            <module-option name="rolesQuery" value="SELECT AUTHORITY, 'Roles' FROM AUTHORITIES JOIN USERS on AUTHORITIES.USERID = USERS.ID WHERE USERNAME=?"/>
+        </login-module>
+    </authentication>
+</security-domain>
+
+6) в jboss-web.xml в директории WEB-INF
+
+<jboss-web>
+    <security-domain>java:/jaas/xdb-security</security-domain>
+</jboss-web>
+
+Установка keycloak
+
+
+1) Распокавать keycloak-overlay-1.9.5.Final  (http://keycloak.jboss.org/downloads)  в папку wildFly
+2) Распокавать keycloak-wf9-adapter-dist-1.9.5.Final  (http://keycloak.jboss.org/keycloak/downloads.html?dir=0%3Dadapters/keycloak-oidc%3B)  в папку wildFly
+3) Поменять порт в jboss-cli.xml на 42990
+Запустить
+ jboss-cli.bat -c --file=keycloak-install.cli
+ jboss-cli.bat -c --file=adapter-install.cli
+
+https://habrahabr.ru/company/eastbanctech/blog/272149/
+
+в редирект url написать http://localhost:42080/backend-1.0-SNAPSHOT/*
