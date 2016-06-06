@@ -2,11 +2,15 @@ package com.intetm.igni.ws;
 
 import com.intetm.igni.db.dao.UserDao;
 import com.intetm.igni.db.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -19,8 +23,11 @@ import java.util.List;
 @Stateless
 public class WordService {
 
-    @EJB
+    @Inject
     private UserDao userDao;
+
+    @Inject
+    private Logger logger;
 
     @Path("/getBook")
     @GET
