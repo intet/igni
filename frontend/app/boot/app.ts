@@ -2,7 +2,7 @@ import {Http, Headers,
     RequestOptions, Response}   from 'angular2/http';
 import {Component}              from 'angular2/core';
 import {Observable}             from 'rxjs/Observable';
-import {KeycloakService}        from './keycloak';
+import {KeycloakService}        from '../security/keycloak';
 
 
 

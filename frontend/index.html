@@ -18,7 +18,6 @@
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
     <script src="node_modules/angular2/bundles/router.dev.js"></script>
     <script src="node_modules/angular2/bundles/http.js"></script>
-
     <script src="auth/js/keycloak.js"></script>
 
     <!-- 2. Configure SystemJS -->
@@ -31,7 +30,7 @@
                 }
             }
         });
-        System.import('app/main')
+        System.import('app/boot/main')
                 .then(null, console.error.bind(console));
     </script>
 </head>
