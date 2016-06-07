@@ -1,5 +1,4 @@
 *.js.map
-*.js
 /.idea
 *.iml
 .idea/
@@ -61,3 +60,4 @@ gradle-app.setting
 *.war
 *.ear
 /tools/
+/frontend/dist/

@@ -1,15 +1,12 @@
 import {Injectable} from 'angular2/core';
 
-
-declare var Keycloak: any;
-
 @Injectable()
 export class KeycloakService {
 
-    static auth : any = {};
+    static auth = {};
 
-    static init() : Promise<any>{
-        let keycloakAuth : any = new Keycloak('keycloak.json');
+    static init() : Promise{
+        let keycloakAuth = new Keycloak('keycloak.json');
         KeycloakService.auth.loggedIn = false;
 
         return new Promise((resolve,reject)=>{
@@ -34,11 +31,11 @@ export class KeycloakService {
         window.location.href = KeycloakService.auth.logoutUrl;
     }
 
-    getToken(): Promise<string>{
-        return new Promise<string>((resolve,reject)=>{
+    getToken(): Promise{
+        return new Promise((resolve,reject)=>{
             if (KeycloakService.auth.authz.token) {
                 KeycloakService.auth.authz.updateToken(5).success(function() {
-                    resolve(<string>KeycloakService.auth.authz.token);
+                    resolve(KeycloakService.auth.authz.token);
                 })
                 .error(function() {
                     reject('Failed to refresh token');
