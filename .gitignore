@@ -61,3 +61,6 @@ gradle-app.setting
 *.ear
 /tools/
 /frontend/dist/
+/frontend/out/
+/backend/src/main/webapp/
+!/backend/src/main/webapp/WEB-INF

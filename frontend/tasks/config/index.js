@@ -2,22 +2,18 @@
 
 module.exports = {
   client: {
-    source: ['client/**/*.{html,css,ico,json}', '!**/app/**'],
-    destination: 'dist/client',
-    app: ['client/**/*.js']
-  },
-  server: {
-    source: ['server/**/*.{js,json}', '!server/**/*.spec.*'],
-    destination: 'dist/server'
+    source: ['src/**/*.{html,css,ico,json}', '!**/app/**'],
+    destination: '../backend/src/main/webapp/',
+    app: ['src/**/*.js']
   },
   general: {
     source: ['package.json', 'Procfile'],
-    destination: 'dist'
+    destination: 'out'
   },
   liveReload: {
     port: 35729
   },
   build: {
-    destination: 'dist'
+    destination: '../backend/src/main/webapp/'
   }
 };

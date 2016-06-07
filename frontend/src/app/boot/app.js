@@ -18,7 +18,7 @@ export class AppComponent {
     static get parameters() {
         return [[TranslateService], [Http], [KeycloakService]];
     }
-
+    products = [];
     constructor(translateService, http:Http, kc:KeycloakService) {
         this._http = http;
         this._kc = kc;
@@ -33,7 +33,7 @@ export class AppComponent {
 
     reloadData() {
         //angular dont have http interceptor yet
-
+        let app = this;
         this._kc.getToken().then(
             token=> {
                 let headers = new Headers({
@@ -43,8 +43,8 @@ export class AppComponent {
 
                 let options = new RequestOptions({headers: headers});
 
-                this._http.get('http://localhost:41080/api/wordService/getBook', options)
-                    .subscribe((res:Response) => this.doSomething(res));
+                this._http.get('api/wordService/getBook', options)
+                    .subscribe((res:Response) => app.doSomething(res));
 
             },
             error=> {
@@ -52,5 +52,8 @@ export class AppComponent {
             }
         );
 
+    }
+    doSomething(res){
+        console.log(res);
     }
 }

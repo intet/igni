@@ -15,8 +15,33 @@ apply plugin: 'com.moowork.gulp'
 group 'com.intetm'
 version '1.0-SNAPSHOT'
 
-task gulpServeAsync << {
-    Thread.start {
-        tasks.gulp_serve.execute()
+task startGulp() {
+    group = 'develop'
+    outputs.upToDateWhen {
+        return false;
+    }
+    doLast {
+        def process = buildProcess()
+        wait(process)
+    }
+}
+def buildProcess() {
+    def builder = new ProcessBuilder("node", "node_modules/gulp/bin/gulp.js","serve");
+    builder.redirectErrorStream(true)
+    builder.directory(projectDir)
+    def process = builder.start()
+    process
+}
+
+def wait(Process process) {
+    def ready = "Finished 'serve' after"
+    def reader = new BufferedReader(new InputStreamReader(process.getInputStream()))
+
+    def line;
+    while ((line = reader.readLine()) != null) {
+        logger.quiet line
+        if (line.contains(ready)) {
+            break;
+        }
     }
 }

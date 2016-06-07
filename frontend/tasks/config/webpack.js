@@ -5,8 +5,8 @@ let config = require('./index').client;
 
 module.exports = {
   entry: {
-    boot: './client/boot.js',
-    vendor: './client/vendor.js'
+    boot: './src/boot.js',
+    vendor: './src/vendor.js'
   },
   output: {
     path: path.resolve(__dirname, '../../', config.destination),

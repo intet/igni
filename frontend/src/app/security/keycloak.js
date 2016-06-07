@@ -8,13 +8,14 @@ export class KeycloakService {
     static init() : Promise{
         let keycloakAuth = new Keycloak('keycloak.json');
         KeycloakService.auth.loggedIn = false;
-
         return new Promise((resolve,reject)=>{
             keycloakAuth.init({ onLoad: 'login-required' })
                 .success( () => {
                     KeycloakService.auth.loggedIn = true;
                     KeycloakService.auth.authz = keycloakAuth;
-                    KeycloakService.auth.logoutUrl = keycloakAuth.authServerUrl + "/realms/igniRealm/protocol/openid-connect/logout?redirect_uri=http://localhost:3000/";
+                    KeycloakService.auth.logoutUrl = keycloakAuth.authServerUrl +
+                        "/realms/igniRealm/protocol/openid-connect/logout?redirect_uri=" +
+                        window.location.href ;
                     resolve(null);
                 })
                 .error(()=> {
