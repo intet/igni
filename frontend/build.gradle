@@ -1,0 +1,22 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath 'com.moowork.gradle:gradle-gulp-plugin:0.12'
+        classpath "com.moowork.gradle:gradle-node-plugin:0.12"
+
+    }
+}
+apply plugin: 'com.moowork.gulp'
+group 'com.intetm'
+version '1.0-SNAPSHOT'
+
+task gulpServeAsync << {
+    Thread.start {
+        tasks.gulp_serve.execute()
+    }
+}

@@ -21,3 +21,4 @@ gradle.ext.dbDrive = "org.hsqldb.jdbc.JDBCDriver"
 
 include 'database'
 include 'backend'
+include 'frontend'

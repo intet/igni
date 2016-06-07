@@ -1,2 +1,4 @@
+
+apply plugin: 'idea'
 group 'com.intetm'
 version '1.0-SNAPSHOT'
