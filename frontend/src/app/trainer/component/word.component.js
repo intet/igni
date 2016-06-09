@@ -10,7 +10,8 @@ import style from "./word.component.css";
     selector: 'word-comp',
     template: template,
     styles: [style],
-    directives: [NgClass]
+    directives: [NgClass],
+    providers:[WordService]
 })
 export class WordComponent implements OnInit {
     word:Word;

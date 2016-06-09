@@ -1,6 +1,6 @@
 import {Injectable} from "angular2/core";
 import {Word} from "./word";
-import {Utils} from "../util/util";
+import {Utils} from "./util/util";
 
 @Injectable()
 export class WordService{
