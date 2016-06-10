@@ -19,7 +19,9 @@ gulp.task('stylesheet', stylesheetTask(singleRun));
 gulp.task('stylesheet-dist', stylesheetTask(true));
 gulp.task('style', eslintTask());
 
-gulp.task('clean', cleanTask());
+gulp.task('clean', cleanTask(false));
+gulp.task('cleanBoot', cleanTask(true));
+gulp.task('buildBoot', clientBuildTask(singleRun, null, true));
 
 gulp.task('serve', function(done) {
   runSequence(
@@ -28,7 +30,13 @@ gulp.task('serve', function(done) {
     done
   )
 });
-
+gulp.task('make', function(done) {
+  runSequence(
+      'cleanBoot',
+      ['buildBoot'],
+      done
+  )
+});
 
 gulp.task('dist', function(done) {
   runSequence(

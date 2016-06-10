@@ -4,9 +4,10 @@ let webpack = require('webpack');
 let util = require('gulp-util');
 let config = require('./config').client;
 
-module.exports = function (singleRun, callback) {
+module.exports = function (singleRun, callback, boot) {
     return function (cb) {
-        let webpackConfig = singleRun ? require('./config/webpack.dist') : require('./config/webpack');
+        let webpackConfig = boot ? require('./config/webpack.boot') : (  singleRun ? require('./config/webpack.dist') : require('./config/webpack'));
+
         let webpackBuild = webpack(webpackConfig);
         let firstRun = true;
 
