@@ -14,7 +14,9 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 @Path("/wordService")
@@ -29,11 +31,15 @@ public class WordService {
     @Inject
     private Logger logger;
 
+    @Context
+    SecurityContext securityContext;
+
     @Path("/getBook")
     @GET
     @RolesAllowed("user")
-    public List<User> getBookTitle() {
+    public String getBookTitle() {
+        String name = securityContext.getUserPrincipal().getName();
         List<User> users = userDao.selectAll();
-        return users;
+        return name;
     }
 }
