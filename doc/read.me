@@ -3,6 +3,9 @@
 Name: DataSourceEx
 JNDI Name: java:jboss/datasources/DataSourceEx
 драйвер выбрать из списка
+jdbc:hsqldb:hsql://localhost:9001/xdb
+gradle.ext.dbUser = "SA"
+gradle.ext.dbPassword = "password"
 3) в  добавить строки persistence.xml
 
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
@@ -49,6 +52,10 @@ JNDI Name: java:jboss/datasources/DataSourceEx
 Запустить
  jboss-cli.bat -c --file=keycloak-install.cli
  jboss-cli.bat -c --file=adapter-install.cli
+
+sh jboss-cli.sh -c --file=keycloak-install.cli
+sh jboss-cli.sh -c --file=adapter-install.cli
+
 
 https://habrahabr.ru/company/eastbanctech/blog/272149/
 

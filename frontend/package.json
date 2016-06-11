@@ -1,5 +1,5 @@
 {
-  "name": "angular2-es6-starter",
+  "name": "igni-fronted",
   "version": "1.0.0",
   "main": "server/index.js",
   "scripts": {
@@ -9,20 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blacksonic/angular2-es6-starter.git"
+    "url": "git+https://github.com/intet/igni"
   },
   "author": {
-    "name": "blacksonic",
-    "email": "soos.gabor86@gmail.com"
+    "name": "sivodedov_da",
+    "email": "intetm@gmail.com"
   },
-  "license": "ISC",
+  "license": "lgplv3",
   "keywords": [
     "angular2",
     "es6",
     "webpack",
     "gulp"
   ],
-  "description": "A skeleton Angular 2 application built in ES6 with Babel, Webpack, Gulp.",
+  "description": "Igni",
   "engines": {
     "node": "4.3.0"
   },
