@@ -8,4 +8,3 @@ import 'angular2/common';
 import 'angular2/platform/browser';
 import 'angular2/router';
 import 'angular2/http';
-import 'angular2-datatable';
