@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core"
-import {Http, Headers, Response, RequestOptions, RequestMethod} from "angular2/http";
+import {Http, Headers, Response, RequestOptions, RequestMethod, URLSearchParams} from "angular2/http";
 import {KeycloakService} from "../security/keycloak";
 
 @Injectable()
@@ -14,27 +14,41 @@ export class ApiService {
     }
 
     get(url:String):Promise {
-        this.sendRequest(url,RequestMethod.Get);
+        return this.sendRequest(url, RequestMethod.Get);
     }
 
-    post(url:String):Promise {
-        this.sendRequest(url,RequestMethod.Post);
+    post(url:String, params:Object):Promise {
+        return this.sendRequest(url, RequestMethod.Post, params);
     }
-    sendRequest(url:String, method:RequestMethod, params):Promise {
+
+    sendRequest(url:String, method:RequestMethod, params:Object):Promise {
         let kc = this._kc;
         let http = this._http;
         return new Promise(function (resolve, reject) {
             kc.getToken().then(
                 token=> {
+                    let searchParams:URLSearchParams = new URLSearchParams();
+                    for (var key in params){
+                        if(params.hasOwnProperty(key)){
+                            let value = params[key];
+                            let param = encodeURI(JSON.stringify(value));
+                            searchParams.set(key,param);
+                        }
+                    }
+
                     let headers = new Headers({
                         'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + token,
+                        'Content-type': 'application/json'
                     });
 
-                    let options = new RequestOptions({headers: headers,
-                        method:method});
+                    let options = new RequestOptions({
+                        headers: headers,
+                        method: method,
+                        search: searchParams
+                    });
 
-                    http.post('api/' + url, options)
+                    http.post('api/' + url,null, options)
                         .subscribe((res:Response) => {
                             resolve(res);
                         });

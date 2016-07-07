@@ -1,12 +1,14 @@
 import {Injectable} from "angular2/core";
 import {Word} from "./word";
 import {Utils} from "./util/util";
-import {ApiService} from "../../security/api";
+import {ApiService} from "../../security/api.service";
+import {Response} from "angular2/http";
+
 
 @Injectable()
-export class WordService{
-    words = [new Word('1','word','слово'),
-    new Word('2','tree','дерево')];
+export class WordService {
+    words = [new Word('4cf957b4-77e4-4906-b0d8-4d5f324fb91', 'word', 'слово'),
+        new Word('4cf957b4-77e4-4906-b0d8-4d5f324fb92', 'tree', 'дерево')];
 
     activeWords;
     activeIndex:number;
@@ -20,10 +22,10 @@ export class WordService{
     }
 
 
-    initNewTest(){
+    initNewTest() {
         this.activeWords = [];
         this.activeIndex = 0;
-        for(var i=0;i<this.words.length;i++){
+        for (var i = 0; i < this.words.length; i++) {
             var word = this.words[i];
             this.activeWords.push(word.id);
             this.activeWords.push(word.id);
@@ -32,8 +34,8 @@ export class WordService{
         this.loadData();
     }
 
-    getWord(id:String){
-        return this.words.filter(word=>word.id===id)[0];
+    getWord(id:String) {
+        return this.words.filter(word=>word.id === id)[0];
     }
 
     getActiveWord():Word {
@@ -46,7 +48,7 @@ export class WordService{
     }
 
 
-    testWord(word:Word, text:String){
+    testWord(word:Word, text:String) {
         return new RegExp(text.toLowerCase()).test(word.translation.toLowerCase());
     }
 
@@ -62,10 +64,10 @@ export class WordService{
             }
         );
     }
-    
-    saveWord(word: Word){
+
+    saveWord(word:Word) {
         let service = this;
-        let params = {word:word};
+        let params = {word: word};
         this._api.post("wordService/saveWord", params).then(
             (res:Response) => service.doSomething(res),
             error=> {

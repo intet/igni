@@ -13,6 +13,7 @@ repositories {
 dependencies {
     compile group: 'javax', name: 'javaee-api', version: gradle.javaxVersion
     compile group: 'org.slf4j', name: 'slf4j-api', version: gradle.slf4jVersion
+    compile group: 'com.google.code.gson', name: 'gson', version: gradle.gsonVersion
     runtime group: 'ch.qos.logback', name: 'logback-classic', version: gradle.logbackVersion
 
     testCompile group: 'junit', name: 'junit', version: '4.11'

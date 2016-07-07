@@ -1,5 +1,7 @@
 package com.intetm.igni.db.entity;
 
+import com.google.gson.Gson;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,5 +25,14 @@ public class Word {
     @Column(name = COLUMN_TRANSLATION)
     private String translation;
 
+    public Word(){
+
+    }
+
+    public static Word valueOf(String json) {
+        Gson gson = new Gson();
+        Word result = gson.fromJson(json, Word.class);
+        return result;
+    }
 
 }

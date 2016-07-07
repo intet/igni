@@ -4,6 +4,7 @@ rootProject.name = 'igni'
 gradle.ext.javaxVersion = '7.0'
 gradle.ext.hsqldbVersion = '2.3.2'
 gradle.ext.keycloakVersion = '1.9.1.Final'
+gradle.ext.gsonVersion='1.7.2'
 
 //logging
 gradle.ext.slf4jVersion = '1.7.13'

@@ -6,19 +6,12 @@ import com.intetm.igni.db.entity.User;
 import com.intetm.igni.db.entity.Word;
 import com.intetm.igni.security.Roles;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
-import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
-import javax.print.DocFlavor;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
@@ -53,6 +46,7 @@ public class WordService {
 
     @Path("/getWords")
     @RolesAllowed(Roles.USER)
+    @POST
     public List<Word> getWords(){
         return wordDao.selectAll();
     }
@@ -60,7 +54,7 @@ public class WordService {
     @Path("/saveWord")
     @RolesAllowed(Roles.USER)
     @POST
-    public void saveWord(Word word){
+    public void saveWord(@QueryParam("word") Word word){
         wordDao.persist(word);
     }
 }
