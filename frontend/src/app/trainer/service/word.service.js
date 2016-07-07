@@ -1,6 +1,7 @@
 import {Injectable} from "angular2/core";
 import {Word} from "./word";
 import {Utils} from "./util/util";
+import {ApiService} from "../../security/api";
 
 @Injectable()
 export class WordService{
@@ -9,6 +10,15 @@ export class WordService{
 
     activeWords;
     activeIndex:number;
+
+    static get parameters() {
+        return [[ApiService]];
+    }
+
+    constructor(api:ApiService) {
+        this._api = api;
+    }
+
 
     initNewTest(){
         this.activeWords = [];
@@ -19,6 +29,7 @@ export class WordService{
             this.activeWords.push(word.id);
         }
         Utils.shuffleArray(this.activeWords);
+        this.loadData();
     }
 
     getWord(id:String){
@@ -38,4 +49,29 @@ export class WordService{
     testWord(word:Word, text:String){
         return new RegExp(text.toLowerCase()).test(word.translation.toLowerCase());
     }
+
+    /**
+     * Работа с api
+     */
+    loadData() {
+        let service = this;
+        this._api.post("wordService/getWords").then(
+            (res:Response) => service.doSomething(res),
+            error=> {
+                console.log(error);
+            }
+        );
+    }
+    
+    saveWord(word: Word){
+        let service = this;
+        let params = {word:word};
+        this._api.post("wordService/saveWord", params).then(
+            (res:Response) => service.doSomething(res),
+            error=> {
+                console.log(error);
+            }
+        );
+    }
+
 }
