@@ -1,5 +1,5 @@
-import {Injectable} from "angular2/core"
-import {Http, Headers, Response, RequestOptions, RequestMethod, URLSearchParams} from "angular2/http";
+import {Injectable} from "@angular/core"
+import {Http, Headers, Response, RequestOptions, RequestMethod, URLSearchParams} from "@angular/http";
 import {KeycloakService} from "../security/keycloak";
 
 @Injectable()

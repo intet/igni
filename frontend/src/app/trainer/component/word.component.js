@@ -1,7 +1,7 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit} from "@angular/core";
 import {Word} from "../service/word";
 import {WordService} from "../service/word.service";
-import {NgClass} from "angular2/common";
+import {NgClass} from "@angular/common";
 import template from "./word.component.html";
 import style from "./word.component.css";
 
