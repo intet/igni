@@ -1,26 +1,22 @@
-import {Component} from "angular2/core";
-import {TranslateService, TranslatePipe} from "ng2-translate/ng2-translate";
+import {Component} from "@angular/core";
 import template from "./app.html";
-import {Http} from "angular2/http";
+import {Http} from "@angular/http";
 import {KeycloakService} from "../security/keycloak";
-import {RouteConfig, RouterOutlet, ROUTER_DIRECTIVES} from "angular2/router";
+import {RouteConfig, RouterOutlet, ROUTER_DIRECTIVES} from "@angular/router";
 import {router} from "./router";
-//import { translation } from '../../../i18n/en';
-//import { router } from './router';
 
 @Component({
     selector: 'my-app',
     directives: [RouterOutlet, ROUTER_DIRECTIVES],
-    template: template,
-    pipes: [TranslatePipe]
+    template: template
 })
-@RouteConfig(router.config)
+//@RouteConfig(router.config)
 export class AppComponent {
     static get parameters() {
-        return [[TranslateService], [Http], [KeycloakService]];
+        return [[Http], [KeycloakService]];
     }
 
-    constructor(translateService, http:Http, kc:KeycloakService) {
+    constructor(http:Http, kc:KeycloakService) {
         this._http = http;
         this._kc = kc;
     }

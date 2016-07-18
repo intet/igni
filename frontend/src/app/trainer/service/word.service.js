@@ -1,8 +1,8 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {Word} from "./word";
 import {Utils} from "./util/util";
 import {ApiService} from "../../security/api.service";
-import {Response} from "angular2/http";
+import {Response} from "@angular/http";
 
 
 @Injectable()

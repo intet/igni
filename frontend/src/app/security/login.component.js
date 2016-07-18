@@ -1,6 +1,6 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 import template from "./login.component.html";
-import {Http, Headers, RequestOptions, Response} from "angular2/http";
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {KeycloakService} from "../security/keycloak";
 import {ApiService} from "./api.service";
 

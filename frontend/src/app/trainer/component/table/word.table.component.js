@@ -1,4 +1,4 @@
-import {Component} from "angular2/core"
+import {Component} from "@angular/core"
 import template from "./word.table.component.html"
 import {Word} from  "../../service/word"
 import {WordService} from "../../service/word.service";
