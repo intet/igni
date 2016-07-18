@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="uuid.type" value="BINARY(16)"/>
+    <property name="varchar255.type" value="VARCHAR(255)"/>
+
+
+    <changeSet id="Create_table_words" author="Sivodedov Dmitry">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="words"/>
+            </not>
+        </preConditions>
+        <createTable tableName="words">
+            <column name="id" type="${uuid.type}">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="original" type="${varchar255.type}">
+            </column>
+            <column name="translation" type="${varchar255.type}">
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

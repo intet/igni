@@ -8,5 +8,6 @@
         <tagDatabase tag="Version 1"/>
     </changeSet>
     <include file="sql/main/V-1.0/2015.11.28_01_Create_User_table.sql"/>
+    <include file="sql/main/V-1.0/2016.07.18_01_Create_table_words.xml"/>
 
 </databaseChangeLog>
