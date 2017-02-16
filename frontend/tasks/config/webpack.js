@@ -13,7 +13,7 @@ module.exports = {
         filename: '[name].js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 loader: 'babel',
@@ -40,20 +40,19 @@ module.exports = {
         ],
         noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/]
     },
-
     resolve: {
-        root: __dirname,
-        extensions: ['', '.js', '.json']
+        extensions: ['*', '.js', '.json']
     },
-
     plugins: [
         new webpack.DefinePlugin({
             ENVIRONMENT: JSON.stringify('development')
         }),
-        new webpack.optimize.CommonsChunkPlugin(
-            'vendor', 'vendor.js', Infinity
-        )
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor', filename: 'vendor.js'
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true
+        })
     ],
-
     devtool: 'cheap-source-map'
 };

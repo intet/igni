@@ -1,21 +1,26 @@
 import "./shim";
-import "rxjs/Rx";
-import {bootstrap} from "@angular/platform-browser";
+import 'rxjs/Rx';
+import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+import {KeycloakService} from './security/keycloak.service';
+import {AppModule} from './boot/app.module';
+/*
 import {ROUTER_PROVIDERS,LocationStrategy,HashLocationStrategy} from "@angular/router";
-import {HTTP_PROVIDERS} from "@angular/http";
-import {KeycloakService} from "./app/security/keycloak";
-import {AppComponent} from "./app/boot/app";
-import {ApiService} from "./app/security/api.service"
 import {provide} from '@angular/core';
+import {HTTP_PROVIDERS} from "@angular/http";
+import {ApiService} from "./app/security/api.service"*/
+import {KeycloakService} from "./app/security/keycloak.service";
 
 KeycloakService.init().then(
-    o=> {
-        bootstrap(AppComponent, [HTTP_PROVIDERS, ROUTER_PROVIDERS,
-            KeycloakService, ApiService,
-            provide(LocationStrategy, {useClass: HashLocationStrategy})
-        ]);
+    o=>{
+        const platform = platformBrowserDynamic();
+        platform.bootstrapModule(AppModule);
+
+        /*  bootstrap(AppComponent, [HTTP_PROVIDERS, ROUTER_PROVIDERS,
+         KeycloakService, ApiService,
+         provide(LocationStrategy, {useClass: HashLocationStrategy})
+         ]);*/
     },
-    x=> {
+    x=>{
         window.location.reload();
     }
 );

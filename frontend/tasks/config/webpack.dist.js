@@ -4,9 +4,9 @@ let config = require('./webpack');
 
 config.devtool = 'source-map';
 config.plugins = [
-  new webpack.optimize.CommonsChunkPlugin(
-    'vendor', 'vendor.js'
-  ),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor', filename: 'vendor.js'
+    }),
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('production')
   }),

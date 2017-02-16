@@ -12,7 +12,7 @@ module.exports = {
         filename: '[name].js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 loader: 'babel',
@@ -41,8 +41,7 @@ module.exports = {
     },
 
     resolve: {
-        root: __dirname,
-        extensions: ['', '.js', '.json']
+        extensions: ['*', '.js', '.json']
     },
 
     plugins: [
