@@ -16,17 +16,19 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                loader: 'babel',
-                exclude: /(node_modules)/,
+                exclude: /(node_modules)/,/*
+                loader: 'babel-loader',
                 query: {
-                    presets: ['es2015'],
+                    presets:  [
+                        ["es2015", { "modules": false }]
+                    ],
                     plugins: [
                         'angular2-annotations',
                         'transform-decorators-legacy',
                         'transform-class-properties',
                         'transform-flow-strip-types'
                     ]
-                }
+                }*/
             },
             {
                 test: /\.html$/,
