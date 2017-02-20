@@ -16,7 +16,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules)/,/*
+                exclude: /(node_modules)/,
                 loader: 'babel-loader',
                 query: {
                     presets:  [
@@ -28,7 +28,7 @@ module.exports = {
                         'transform-class-properties',
                         'transform-flow-strip-types'
                     ]
-                }*/
+                }
             },
             {
                 test: /\.html$/,
