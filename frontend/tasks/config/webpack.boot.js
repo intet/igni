@@ -22,6 +22,14 @@ module.exports = {
                 }
             },
             {
+                test: /\.ts(x?)$/,
+                loader: 'ts',
+                exclude: /(node_modules)/,
+                query: {
+                    presets: ['es2015', 'angular2']
+                }
+            },
+            {
                 test: /\.html$/,
                 loader: 'raw?minimize=false'
             },

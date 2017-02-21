@@ -20,7 +20,9 @@ var KeycloakService = (function () {
                 .success(function () {
                 KeycloakService.auth.loggedIn = true;
                 KeycloakService.auth.authz = keycloakAuth;
-                KeycloakService.auth.logoutUrl = keycloakAuth.authServerUrl + "/realms/demo/protocol/openid-connect/logout?redirect_uri=/angular2-product/index.html";
+                KeycloakService.auth.logoutUrl = keycloakAuth.authServerUrl +
+                    "/realms/igniRealm/protocol/openid-connect/logout?redirect_uri=" +
+                    window.location.href;
                 resolve();
             })
                 .error(function () {
@@ -29,7 +31,6 @@ var KeycloakService = (function () {
         });
     };
     KeycloakService.prototype.logout = function () {
-        console.log('*** LOGOUT');
         KeycloakService.auth.loggedIn = false;
         KeycloakService.auth.authz = null;
         window.location.href = KeycloakService.auth.logoutUrl;

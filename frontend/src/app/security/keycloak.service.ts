@@ -15,7 +15,9 @@ export class KeycloakService {
                 .success(() => {
                     KeycloakService.auth.loggedIn = true;
                     KeycloakService.auth.authz = keycloakAuth;
-                    KeycloakService.auth.logoutUrl = keycloakAuth.authServerUrl + "/realms/demo/protocol/openid-connect/logout?redirect_uri=/angular2-product/index.html";
+                    KeycloakService.auth.logoutUrl = keycloakAuth.authServerUrl +
+                        "/realms/igniRealm/protocol/openid-connect/logout?redirect_uri=" +
+                        window.location.href;
                     resolve();
                 })
                 .error(() => {
@@ -25,7 +27,6 @@ export class KeycloakService {
     }
 
     logout() {
-        console.log('*** LOGOUT');
         KeycloakService.auth.loggedIn = false;
         KeycloakService.auth.authz = null;
 

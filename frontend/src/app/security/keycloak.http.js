@@ -1,116 +1,124 @@
-import {Injectable} from "@angular/core";
-import {Http, Request, ConnectionBackend, RequestOptions, RequestOptionsArgs, Response, Headers} from "@angular/http";
-
-import {KeycloakService} from "./keycloak.service";
-import {Observable} from 'rxjs/Rx';
-
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var keycloak_service_1 = require("./keycloak.service");
+var Rx_1 = require('rxjs/Rx');
 /**
  * This provides a wrapper over the ng2 Http class that insures tokens are refreshed on each request.
  */
-@Injectable()
-export class KeycloakHttp extends Http {
-    constructor(_backend: ConnectionBackend, _defaultOptions: RequestOptions, private _keycloakService:KeycloakService) {
-        super(_backend, _defaultOptions);
+var KeycloakHttp = (function (_super) {
+    __extends(KeycloakHttp, _super);
+    function KeycloakHttp(_backend, _defaultOptions, _keycloakService) {
+        _super.call(this, _backend, _defaultOptions);
+        this._keycloakService = _keycloakService;
     }
-
-    private setToken(options: RequestOptionsArgs) {
-
-        if (options == null || KeycloakService.auth == null || KeycloakService.auth.authz == null || KeycloakService.auth.authz.token == null) {
+    KeycloakHttp.prototype.setToken = function (options) {
+        if (options == null || keycloak_service_1.KeycloakService.auth == null || keycloak_service_1.KeycloakService.auth.authz == null || keycloak_service_1.KeycloakService.auth.authz.token == null) {
             console.log("Need a token, but no token is available, not setting bearer token.");
             return;
         }
-
-        options.headers.set('Authorization', 'Bearer ' + KeycloakService.auth.authz.token);
-    }
-
-    private configureRequest(f:Function, url:string | Request, options:RequestOptionsArgs, body?: any):Observable<Response> {
-        let tokenPromise:Promise<string> = this._keycloakService.getToken();
-        let tokenObservable:Observable<string> = Observable.fromPromise(tokenPromise);
-        let tokenUpdateObservable:Observable<any> = Observable.create((observer) => {
+        options.headers.set('Authorization', 'Bearer ' + keycloak_service_1.KeycloakService.auth.authz.token);
+    };
+    KeycloakHttp.prototype.configureRequest = function (f, url, options, body) {
+        var _this = this;
+        var tokenPromise = this._keycloakService.getToken();
+        var tokenObservable = Rx_1.Observable.fromPromise(tokenPromise);
+        var tokenUpdateObservable = Rx_1.Observable.create(function (observer) {
             if (options == null) {
-                let headers = new Headers();
-                options = new RequestOptions({ headers: headers });
+                var headers = new http_1.Headers();
+                options = new http_1.RequestOptions({ headers: headers });
             }
-
-            this.setToken(options);
+            _this.setToken(options);
             observer.next();
             observer.complete();
         });
-        let requestObservable:Observable<Response> = Observable.create((observer) => {
-            let result;
+        var requestObservable = Rx_1.Observable.create(function (observer) {
+            var result;
             if (body) {
-                result = f.apply(this, [url, body, options]);
-            } else {
-                result = f.apply(this, [url, options]);
+                result = f.apply(_this, [url, body, options]);
             }
-
-            result.subscribe((response) => {
+            else {
+                result = f.apply(_this, [url, options]);
+            }
+            result.subscribe(function (response) {
                 observer.next(response);
                 observer.complete();
-            }, (err) => observer.error(err));
+            }, function (err) { return observer.error(err); });
         });
-
-        return <Observable<Response>>Observable
+        return Rx_1.Observable
             .merge(tokenObservable, tokenUpdateObservable, requestObservable, 1) // Insure no concurrency in the merged Observables
-            .filter((response) => response instanceof Response);
-    }
-
+            .filter(function (response) { return response instanceof http_1.Response; });
+    };
     /**
      * Performs any type of http request. First argument is required, and can either be a url or
      * a {@link Request} instance. If the first argument is a url, an optional {@link RequestOptions}
      * object can be provided as the 2nd argument. The options object will be merged with the values
      * of {@link BaseRequestOptions} before performing the request.
      */
-    request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-        return this.configureRequest(super.request, url, options);
-    }
-
+    KeycloakHttp.prototype.request = function (url, options) {
+        return this.configureRequest(_super.prototype.request, url, options);
+    };
     /**
      * Performs a request with `get` http method.
      */
-    get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this.configureRequest(super.get, url, options);
-    }
-
+    KeycloakHttp.prototype.get = function (url, options) {
+        return this.configureRequest(_super.prototype.get, url, options);
+    };
     /**
      * Performs a request with `post` http method.
      */
-    post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-        return this.configureRequest(super.post, url, options, body);
-    }
-
+    KeycloakHttp.prototype.post = function (url, body, options) {
+        return this.configureRequest(_super.prototype.post, url, options, body);
+    };
     /**
      * Performs a request with `put` http method.
      */
-    put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-        return this.configureRequest(super.put, url, options, body);
-    }
-
+    KeycloakHttp.prototype.put = function (url, body, options) {
+        return this.configureRequest(_super.prototype.put, url, options, body);
+    };
     /**
      * Performs a request with `delete` http method.
      */
-    delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this.configureRequest(super.delete, url, options);
-    }
-
+    KeycloakHttp.prototype.delete = function (url, options) {
+        return this.configureRequest(_super.prototype.delete, url, options);
+    };
     /**
      * Performs a request with `patch` http method.
      */
-    patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-        return this.configureRequest(super.patch, url, options, body);
-    }
-
+    KeycloakHttp.prototype.patch = function (url, body, options) {
+        return this.configureRequest(_super.prototype.patch, url, options, body);
+    };
     /**
      * Performs a request with `head` http method.
      */
-    head(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this.configureRequest(super.head, url, options);
-    }
-
+    KeycloakHttp.prototype.head = function (url, options) {
+        return this.configureRequest(_super.prototype.head, url, options);
+    };
     /**
      * Performs a request with `options` http method.
      */
-    options(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this.configureRequest(super.options, url, options);
-    }
-}
+    KeycloakHttp.prototype.options = function (url, options) {
+        return this.configureRequest(_super.prototype.options, url, options);
+    };
+    KeycloakHttp = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.ConnectionBackend, http_1.RequestOptions, keycloak_service_1.KeycloakService])
+    ], KeycloakHttp);
+    return KeycloakHttp;
+}(http_1.Http));
+exports.KeycloakHttp = KeycloakHttp;
+//# sourceMappingURL=keycloak.http.js.map
