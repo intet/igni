@@ -12,10 +12,12 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
 var keycloak_service_1 = require("../security/keycloak.service");
+var api_service_1 = require("../security/api.service");
 var AppComponent = (function () {
-    function AppComponent(http, kc) {
+    function AppComponent(http, kc, api) {
         this.http = http;
         this.kc = kc;
+        this.api = api;
         this.products = [];
     }
     AppComponent.prototype.logout = function () {
@@ -23,7 +25,7 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.reloadData = function () {
         var _this = this;
-        this.http.get('api/wordService/getWords')
+        this.api.get('wordService/getWords')
             .map(function (res) { return res.json(); })
             .subscribe(function (prods) { return _this.products = prods; }, function (error) { return console.log(error); });
     };
@@ -32,7 +34,7 @@ var AppComponent = (function () {
             selector: 'my-app',
             template: "\n    <div id=\"content-area\" class=\"col-md-9\" role=\"main\">\n      <div id=\"content\">\n        <h1>Angular2 Product (Beta)</h1>\n        <h2><span>Products</span></h2>\n        <button type=\"button\" (click)=\"logout()\">Sign Out</button>\n        <button type=\"button\" (click)=\"reloadData()\">Reload</button>\n        <table class=\"table\" [hidden]=\"!products.length\">\n          <thead>\n          <tr>\n            <th>Product Listing</th>\n          </tr>\n          </thead>\n          <tbody>\n          <tr *ngFor=\"let p of products\">\n            <td>{{p}}</td>\n          </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n"
         }), 
-        __metadata('design:paramtypes', [http_1.Http, keycloak_service_1.KeycloakService])
+        __metadata('design:paramtypes', [http_1.Http, keycloak_service_1.KeycloakService, api_service_1.ApiService])
     ], AppComponent);
     return AppComponent;
 }());

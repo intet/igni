@@ -4,6 +4,7 @@ import {HttpModule, Http, XHRBackend, RequestOptions} from '@angular/http';
 import {KeycloakService} from "../security/keycloak.service";
 import {AppComponent} from "./app.component";
 import {KeycloakHttp} from "../security/keycloak.http";
+import {ApiService} from "../security/api.service";
 
 @NgModule({
     imports: [
@@ -14,8 +15,7 @@ import {KeycloakHttp} from "../security/keycloak.http";
         AppComponent
     ],
     providers: [
-        KeycloakService,
-
+        KeycloakService, ApiService,
         {
             provide: Http,
             useFactory:

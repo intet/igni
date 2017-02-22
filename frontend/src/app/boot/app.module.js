@@ -14,6 +14,7 @@ var http_1 = require('@angular/http');
 var keycloak_service_1 = require("../security/keycloak.service");
 var app_component_1 = require("./app.component");
 var keycloak_http_1 = require("../security/keycloak.http");
+var api_service_1 = require("../security/api.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,7 +28,7 @@ var AppModule = (function () {
                 app_component_1.AppComponent
             ],
             providers: [
-                keycloak_service_1.KeycloakService,
+                keycloak_service_1.KeycloakService, api_service_1.ApiService,
                 {
                     provide: http_1.Http,
                     useFactory: function (backend, defaultOptions, keycloakService) {

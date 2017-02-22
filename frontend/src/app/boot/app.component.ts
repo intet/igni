@@ -3,6 +3,7 @@ import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import {KeycloakService} from "../security/keycloak.service";
+import {ApiService} from "../security/api.service";
 
 @Component({
     selector: 'my-app',
@@ -32,14 +33,14 @@ import {KeycloakService} from "../security/keycloak.service";
 export class AppComponent {
     products: string[] = [];
 
-    constructor(private http: Http, private kc: KeycloakService) {}
+    constructor(private http: Http, private kc: KeycloakService, private api:ApiService) {}
 
     logout() {
         this.kc.logout();
     }
 
     reloadData() {
-        this.http.get('api/wordService/getWords')
+        this.api.get('wordService/getWords')
             .map(res => res.json())
             .subscribe(prods => this.products = prods,
                 error => console.log(error));

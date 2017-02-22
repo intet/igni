@@ -1,11 +1,11 @@
-export class Word {
-    original:String;
-    translation:String;
-    id:String;
-
-    constructor(id:String, original:String, translation:String) {
+"use strict";
+var Word = (function () {
+    function Word(id, original, translation) {
         this.id = id;
         this.original = original;
         this.translation = translation;
     }
-}
+    return Word;
+}());
+exports.Word = Word;
+//# sourceMappingURL=word.js.map

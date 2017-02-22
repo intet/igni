@@ -15,20 +15,28 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                loader: 'babel',
                 exclude: /(node_modules)/,
+                loader: 'babel-loader',
                 query: {
-                    presets: ['es2015', 'angular2']
+                    presets:  [
+                        ["es2015", { "modules": false }]
+                    ],
+                    plugins: [
+                        'angular2-annotations',
+                        'transform-decorators-legacy',
+                        'transform-class-properties',
+                        'transform-flow-strip-types'
+                    ]
                 }
             },
-            {
+           /* {
                 test: /\.ts(x?)$/,
                 loader: 'ts',
                 exclude: /(node_modules)/,
                 query: {
                     presets: ['es2015', 'angular2']
                 }
-            },
+            },*/
             {
                 test: /\.html$/,
                 loader: 'raw?minimize=false'
