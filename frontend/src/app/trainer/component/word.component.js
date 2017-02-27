@@ -11,19 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var word_service_1 = require("../service/word.service");
 var common_1 = require("@angular/common");
-var word_component_html_1 = require("./word.component.html");
-var word_component_css_1 = require("./word.component.css");
 var WordComponent = (function () {
     function WordComponent(wordService) {
         this.wordService = wordService;
     }
-    Object.defineProperty(WordComponent, "parameters", {
-        get: function () {
-            return [[word_service_1.WordService]];
-        },
-        enumerable: true,
-        configurable: true
-    });
     WordComponent.prototype.ngOnInit = function () {
         this.wordService.initNewTest();
         this.word = this.wordService.getActiveWord();
@@ -50,8 +41,8 @@ var WordComponent = (function () {
     WordComponent = __decorate([
         core_1.Component({
             selector: 'word-comp',
-            template: word_component_html_1.default,
-            styles: [word_component_css_1.default],
+            template: "\n<div class=\"col-md-2 col-md-offset-5 table-bordered \" [ngClass]=\"{swing: invalid}\">\n    <form>\n        <h1 class=\"text-center\">Test word</h1>\n        <p class=\"text-center\">{{word.original}}</p>\n     <!--   <div class=\"form-group\" >\n            <input class=\"col-md-12 media-heading\" [(ngModel)]=\"input\" required\n                   type=\"text\" (keypress)=\"onEnter($event)\"/>\n        </div>-->\n        <p>{{input}}</p>\n    </form>\n</div>",
+            styles: ["/*.ng-valid[required] {\n    border-left: 5px solid #42A948;\n}\n.ng-invalid {\n    border-left: 5px solid #a94442;\n}*/\n\n@-webkit-keyframes swing\n{\n    15%\n    {\n        -webkit-transform: translateX(5px);\n        transform: translateX(5px);\n    }\n    30%\n    {\n        -webkit-transform: translateX(-5px);\n        transform: translateX(-5px);\n    }\n    50%\n    {\n        -webkit-transform: translateX(3px);\n        transform: translateX(3px);\n    }\n    65%\n    {\n        -webkit-transform: translateX(-3px);\n        transform: translateX(-3px);\n    }\n    80%\n    {\n        -webkit-transform: translateX(2px);\n        transform: translateX(2px);\n    }\n    100%\n    {\n        -webkit-transform: translateX(0);\n        transform: translateX(0);\n    }\n}\n@keyframes swing\n{\n    15%\n    {\n        -webkit-transform: translateX(5px);\n        transform: translateX(5px);\n    }\n    30%\n    {\n        -webkit-transform: translateX(-5px);\n        transform: translateX(-5px);\n    }\n    50%\n    {\n        -webkit-transform: translateX(3px);\n        transform: translateX(3px);\n    }\n    65%\n    {\n        -webkit-transform: translateX(-3px);\n        transform: translateX(-3px);\n    }\n    80%\n    {\n        -webkit-transform: translateX(2px);\n        transform: translateX(2px);\n    }\n    100%\n    {\n        -webkit-transform: translateX(0);\n        transform: translateX(0);\n    }\n}\n.swing\n{\n    -webkit-animation: swing 1s ease;\n    animation: swing 1s ease;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1;\n}"],
             directives: [common_1.NgClass],
             providers: [word_service_1.WordService]
         }), 

@@ -9,29 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var word_table_component_html_1 = require("./word.table.component.html");
 var word_1 = require("../../service/word");
 var word_service_1 = require("../../service/word.service");
 var WordTableComponent = (function () {
     function WordTableComponent(wordService) {
+        this.wordService = wordService;
         this.data = [new word_1.Word('4cf957b4-77e4-4906-b0d8-4d5f324fb91', 'word', 'слово'),
             new word_1.Word('4cf957b4-77e4-4906-b0d8-4d5f324fb92', 'tree', 'дерево')];
-        this.wordService = wordService;
     }
-    Object.defineProperty(WordTableComponent, "parameters", {
-        get: function () {
-            return [[word_service_1.WordService]];
-        },
-        enumerable: true,
-        configurable: true
-    });
     WordTableComponent.prototype.add = function () {
         this.wordService.saveWord(this.data[0]);
     };
     WordTableComponent = __decorate([
         core_1.Component({
             selector: 'word-table',
-            template: word_table_component_html_1.default,
+            template: "\n<button type=\"button\" (click)=\"add()\">Add</button>\n<table class=\"table table-striped\">\n    <thead>\n    <tr>\n        <th style=\"width: 50%\">Word</th>\n        <th style=\"width: 50%\">Translation</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let item of data\">\n        <td>{{item.original}}</td>\n        <td>{{item.translation}}</td>\n    </tr>\n    </tbody>\n</table>\n",
             providers: [word_service_1.WordService]
         }), 
         __metadata('design:paramtypes', [word_service_1.WordService])

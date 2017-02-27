@@ -14,17 +14,10 @@ var util_1 = require("./util/util");
 var api_service_1 = require("../../security/api.service");
 var WordService = (function () {
     function WordService(api) {
+        this.api = api;
         this.words = [new word_1.Word('4cf957b4-77e4-4906-b0d8-4d5f324fb91', 'word', 'слово'),
             new word_1.Word('4cf957b4-77e4-4906-b0d8-4d5f324fb92', 'tree', 'дерево')];
-        this._api = api;
     }
-    Object.defineProperty(WordService, "parameters", {
-        get: function () {
-            return [[api_service_1.ApiService]];
-        },
-        enumerable: true,
-        configurable: true
-    });
     WordService.prototype.initNewTest = function () {
         this.activeWords = [];
         this.activeIndex = 0;
@@ -54,16 +47,18 @@ var WordService = (function () {
      */
     WordService.prototype.loadData = function () {
         var service = this;
-        this._api.post("wordService/getWords").then(function (res) { return service.doSomething(res); }, function (error) {
+        this.api.post("wordService/getWords").then(function (res) { return service.doSomething(res); }, function (error) {
             console.log(error);
         });
     };
     WordService.prototype.saveWord = function (word) {
         var service = this;
         var params = { word: word };
-        this._api.post("wordService/saveWord", params).then(function (res) { return service.doSomething(res); }, function (error) {
+        this.api.post("wordService/saveWord", params).then(function (res) { return service.doSomething(res); }, function (error) {
             console.log(error);
         });
+    };
+    WordService.prototype.doSomething = function (Response) {
     };
     WordService = __decorate([
         core_1.Injectable(), 

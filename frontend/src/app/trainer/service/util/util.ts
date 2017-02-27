@@ -1,8 +1,5 @@
-"use strict";
-var Utils = (function () {
-    function Utils() {
-    }
-    Utils.shuffleArray = function (array) {
+export class Utils {
+    static shuffleArray(array) {
         for (var i = array.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var temp = array[i];
@@ -10,8 +7,5 @@ var Utils = (function () {
             array[j] = temp;
         }
         return array;
-    };
-    return Utils;
-}());
-exports.Utils = Utils;
-//# sourceMappingURL=util.js.map
+    }
+}

@@ -15,6 +15,12 @@ var keycloak_service_1 = require("../security/keycloak.service");
 var app_component_1 = require("./app.component");
 var keycloak_http_1 = require("../security/keycloak.http");
 var api_service_1 = require("../security/api.service");
+var login_component_1 = require("../security/login.component");
+var word_component_1 = require("../trainer/component/word.component");
+var word_table_component_1 = require("../trainer/component/table/word.table.component");
+var word_service_1 = require("../trainer/service/word.service");
+var app_routing_module_1 = require("./app-routing.module");
+var common_1 = require("@angular/common");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,19 +28,27 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
-                http_1.HttpModule
+                http_1.HttpModule,
+                app_routing_module_1.AppRoutingModule
             ],
             declarations: [
-                app_component_1.AppComponent
+                app_component_1.AppComponent,
+                login_component_1.LoginComponent,
+                word_component_1.WordComponent,
+                word_table_component_1.WordTableComponent
             ],
             providers: [
-                keycloak_service_1.KeycloakService, api_service_1.ApiService,
+                keycloak_service_1.KeycloakService, api_service_1.ApiService, word_service_1.WordService,
                 {
                     provide: http_1.Http,
                     useFactory: function (backend, defaultOptions, keycloakService) {
                         return new keycloak_http_1.KeycloakHttp(backend, defaultOptions, keycloakService);
                     },
                     deps: [http_1.XHRBackend, http_1.RequestOptions, keycloak_service_1.KeycloakService]
+                },
+                {
+                    provide: common_1.LocationStrategy,
+                    useClass: common_1.HashLocationStrategy
                 }
             ],
             bootstrap: [app_component_1.AppComponent]

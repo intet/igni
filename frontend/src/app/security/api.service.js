@@ -15,10 +15,17 @@ var ApiService = (function () {
         this._http = _http;
     }
     ApiService.prototype.get = function (url, options) {
-        return this._http.get('api/' + url, options);
+        return new Promise(function (resolve, reject) {
+            this._http.get('api/' + url, options).subscribe(function (res) { resolve(res); });
+        });
     };
-    ApiService.prototype.post = function (url, body, options) {
-        return this._http.post('api/' + url, body, options);
+    ApiService.prototype.post = function (url, params) {
+        var options = new http_1.RequestOptions({
+            search: new http_1.URLSearchParams(params)
+        });
+        return new Promise(function (resolve, reject) {
+            this._http.post('api/' + url, null, options).subscribe(function (res) { resolve(res); });
+        });
     };
     ApiService = __decorate([
         core_1.Injectable(), 

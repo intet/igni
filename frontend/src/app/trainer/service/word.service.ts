@@ -13,13 +13,7 @@ export class WordService {
     activeWords;
     activeIndex:number;
 
-    static get parameters() {
-        return [[ApiService]];
-    }
-
-    constructor(api:ApiService) {
-        this._api = api;
-    }
+    constructor(private api:ApiService) {}
 
 
     initNewTest() {
@@ -57,7 +51,7 @@ export class WordService {
      */
     loadData() {
         let service = this;
-        this._api.post("wordService/getWords").then(
+        this.api.post("wordService/getWords").then(
             (res:Response) => service.doSomething(res),
             error=> {
                 console.log(error);
@@ -68,12 +62,15 @@ export class WordService {
     saveWord(word:Word) {
         let service = this;
         let params = {word: word};
-        this._api.post("wordService/saveWord", params).then(
+        this.api.post("wordService/saveWord", params).then(
             (res:Response) => service.doSomething(res),
             error=> {
                 console.log(error);
             }
         );
+    }
+    doSomething(Response :Response){
+
     }
 
 }

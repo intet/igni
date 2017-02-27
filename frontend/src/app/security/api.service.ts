@@ -1,17 +1,23 @@
 import {Injectable} from "@angular/core"
-import {Http, Response, RequestOptions, RequestOptionsArgs, URLSearchParams} from "@angular/http";
-import {Observable} from 'rxjs/Rx';
+import {Http, Response, RequestOptions, RequestOptionsArgs, URLSearchParams, Headers} from "@angular/http";
 
 @Injectable()
 export class ApiService {
     constructor(private _http:Http) {}
 
-    get( url: string, options?: RequestOptionsArgs):Observable<Response> {
-        return this._http.get('api/' + url, options);
+    get( url: string, options?: RequestOptionsArgs):Promise<Response>  {
+        return new Promise(function (resolve, reject) {
+            this._http.get('api/' + url, options).subscribe((res:Response) => {resolve(res)});
+        });
     }
 
-    post(url: string, body: any, options?: RequestOptionsArgs):Observable<Response> {
-        return this._http.post('api/' + url, body, options);
+    post(url: string, params?: any):Promise<Response> {
+        let options = new RequestOptions({
+            search:  new URLSearchParams(params)
+        });
+        return new Promise(function (resolve, reject) {
+            this._http.post('api/' + url, null, options).subscribe((res:Response) => {resolve(res)});
+        });
     }
 }
 
