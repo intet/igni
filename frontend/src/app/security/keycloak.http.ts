@@ -31,6 +31,9 @@ export class KeycloakHttp extends Http {
                 let headers = new Headers();
                 options = new RequestOptions({ headers: headers });
             }
+            else if (options.headers == null){
+                options.headers = new Headers();
+            }
 
             this.setToken(options);
             observer.next();

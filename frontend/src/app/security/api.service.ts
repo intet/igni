@@ -3,11 +3,12 @@ import {Http, Response, RequestOptions, RequestOptionsArgs, URLSearchParams, Hea
 
 @Injectable()
 export class ApiService {
-    constructor(private _http:Http) {}
+    constructor(private http:Http) {}
 
     get( url: string, options?: RequestOptionsArgs):Promise<Response>  {
+        let http = this.http;
         return new Promise(function (resolve, reject) {
-            this._http.get('api/' + url, options).subscribe((res:Response) => {resolve(res)});
+            http.get('api/' + url, options).subscribe((res:Response) => {resolve(res)});
         });
     }
 
@@ -15,8 +16,9 @@ export class ApiService {
         let options = new RequestOptions({
             search:  new URLSearchParams(params)
         });
+        let http = this.http;
         return new Promise(function (resolve, reject) {
-            this._http.post('api/' + url, null, options).subscribe((res:Response) => {resolve(res)});
+            http.post('api/' + url, null, options).subscribe((res:Response) => {resolve(res)});
         });
     }
 }

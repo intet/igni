@@ -4,17 +4,12 @@ import "rxjs/add/operator/map";
 @Component({
     selector: 'my-app',
     template: `
-<div id="content">
-    <h1>Igni</h1>
-    </div>
-    <div id="navbar" >
-    <ul class="nav navbar-nav">
-    <li><a [routerLink]="['/login']">Login</a></li>
-    <li><a [routerLink]="['/word']">Word</a></li>
-    <li><a [routerLink]="['/table']">Table</a></li>
-    </ul>
-    </div>
-    <div>
+<nav id="navbar navbar-light bg-faded" >
+    <a class="navbar-brand" [routerLink]="['/login']">Login</a>
+    <a class="navbar-brand" [routerLink]="['/word']">Word</a>
+    <a class="navbar-brand" [routerLink]="['/table']">Table</a>
+</nav>
+<div>
     <router-outlet></router-outlet>
 </div>
 `

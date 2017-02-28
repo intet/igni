@@ -11,20 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var ApiService = (function () {
-    function ApiService(_http) {
-        this._http = _http;
+    function ApiService(http) {
+        this.http = http;
     }
     ApiService.prototype.get = function (url, options) {
+        var http = this.http;
         return new Promise(function (resolve, reject) {
-            this._http.get('api/' + url, options).subscribe(function (res) { resolve(res); });
+            http.get('api/' + url, options).subscribe(function (res) { resolve(res); });
         });
     };
     ApiService.prototype.post = function (url, params) {
         var options = new http_1.RequestOptions({
             search: new http_1.URLSearchParams(params)
         });
+        var http = this.http;
         return new Promise(function (resolve, reject) {
-            this._http.post('api/' + url, null, options).subscribe(function (res) { resolve(res); });
+            http.post('api/' + url, null, options).subscribe(function (res) { resolve(res); });
         });
     };
     ApiService = __decorate([

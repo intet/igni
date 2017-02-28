@@ -46,7 +46,7 @@ public class WordService {
 
     @Path("/getWords")
     @RolesAllowed(Roles.USER)
-    @GET
+    @POST
     public List<Word> getWords(){
         return wordDao.selectAll();
     }

@@ -42,6 +42,9 @@ var KeycloakHttp = (function (_super) {
                 var headers = new http_1.Headers();
                 options = new http_1.RequestOptions({ headers: headers });
             }
+            else if (options.headers == null) {
+                options.headers = new http_1.Headers();
+            }
             _this.setToken(options);
             observer.next();
             observer.complete();

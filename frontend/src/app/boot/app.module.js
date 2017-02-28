@@ -10,17 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
-var http_1 = require('@angular/http');
+var http_1 = require("@angular/http");
+var forms_1 = require("@angular/forms");
+var common_1 = require("@angular/common");
 var keycloak_service_1 = require("../security/keycloak.service");
-var app_component_1 = require("./app.component");
-var keycloak_http_1 = require("../security/keycloak.http");
 var api_service_1 = require("../security/api.service");
+var word_service_1 = require("../trainer/service/word.service");
+var keycloak_http_1 = require("../security/keycloak.http");
+var app_component_1 = require("./app.component");
 var login_component_1 = require("../security/login.component");
 var word_component_1 = require("../trainer/component/word.component");
 var word_table_component_1 = require("../trainer/component/table/word.table.component");
-var word_service_1 = require("../trainer/service/word.service");
 var app_routing_module_1 = require("./app-routing.module");
-var common_1 = require("@angular/common");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,7 +30,8 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
-                app_routing_module_1.AppRoutingModule
+                app_routing_module_1.AppRoutingModule,
+                forms_1.FormsModule
             ],
             declarations: [
                 app_component_1.AppComponent,
