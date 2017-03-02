@@ -16,7 +16,7 @@ var WordComponent = (function () {
     }
     WordComponent.prototype.ngOnInit = function () {
         this.wordService.initNewTest();
-        this.word = this.wordService.getActiveWord();
+        this.word = this.wordService.activeTest.getActiveWord();
         this.invalid = false;
     };
     WordComponent.prototype.onEnter = function (e) {
@@ -24,16 +24,17 @@ var WordComponent = (function () {
             return;
         e.preventDefault();
         if (this.wordService.testWord(this.word, this.input)) {
-            this.word = this.wordService.getNextWord();
+            this.word = this.wordService.activeTest.getNextWord();
             this.input = '';
             this.invalid = false;
         }
         else {
+            this.wordService.activeTest.markInvalid();
             this.input = '';
             this.invalid = true;
-            var component = this;
+            var component_1 = this;
             setTimeout(function () {
-                component.invalid = false;
+                component_1.invalid = false;
             }, 1000);
         }
     };

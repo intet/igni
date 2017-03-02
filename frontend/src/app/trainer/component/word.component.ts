@@ -107,7 +107,7 @@ export class WordComponent implements OnInit {
 
     ngOnInit() {
         this.wordService.initNewTest();
-        this.word = this.wordService.getActiveWord();
+        this.word = this.wordService.activeTest.getActiveWord();
         this.invalid = false;
     }
 
@@ -115,14 +115,15 @@ export class WordComponent implements OnInit {
         if (e.keyCode != 13)return;
         e.preventDefault();
         if (this.wordService.testWord(this.word, this.input)) {
-            this.word = this.wordService.getNextWord();
+            this.word = this.wordService.activeTest.getNextWord();
             this.input = '';
             this.invalid = false;
         }
         else {
+            this.wordService.activeTest.markInvalid();
             this.input = '';
             this.invalid = true;
-            var component = this;
+            let component = this;
             setTimeout(function () {
                 component.invalid = false;
             }, 1000);

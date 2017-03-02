@@ -3,44 +3,31 @@ import {Word} from "./word";
 import {Utils} from "./util/util";
 import {ApiService} from "../../security/api.service";
 import {Response} from "@angular/http";
+import {WordTest} from "./word.test";
 
 
 @Injectable()
 export class WordService {
-    words = [new Word('4cf957b4-77e4-4906-b0d8-4d5f324fb91', 'word', 'слово'),
+    private words = [new Word('4cf957b4-77e4-4906-b0d8-4d5f324fb91', 'word', 'слово'),
         new Word('4cf957b4-77e4-4906-b0d8-4d5f324fb92', 'tree', 'дерево')];
-
-    activeWords;
-    activeIndex:number;
-
+    activeTest:WordTest;
     constructor(private api:ApiService) {}
 
-
     initNewTest() {
-        this.activeWords = [];
-        this.activeIndex = 0;
-        for (var i = 0; i < this.words.length; i++) {
-            var word = this.words[i];
-            this.activeWords.push(word.id);
-            this.activeWords.push(word.id);
+        let wordsForTest = [];
+        for (let i = 0; i < this.words.length; i++) {
+            let word = this.words[i];
+            wordsForTest.push(word.id);
+            wordsForTest.push(word.id);
         }
-        Utils.shuffleArray(this.activeWords);
+        Utils.shuffleArray(wordsForTest);
+        this.activeTest = new WordTest(this, wordsForTest);
         this.loadData();
     }
 
     getWord(id:String) {
         return this.words.filter(word=>word.id === id)[0];
     }
-
-    getActiveWord():Word {
-        return this.getWord(this.activeWords[this.activeIndex]);
-    }
-
-    getNextWord():Word {
-        this.activeIndex++;
-        return this.getActiveWord();
-    }
-
 
     testWord(word:Word, text:String) {
         return new RegExp(text.toLowerCase()).test(word.translation.toLowerCase());

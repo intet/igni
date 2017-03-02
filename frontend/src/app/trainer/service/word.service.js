@@ -12,6 +12,7 @@ var core_1 = require("@angular/core");
 var word_1 = require("./word");
 var util_1 = require("./util/util");
 var api_service_1 = require("../../security/api.service");
+var word_test_1 = require("./word.test");
 var WordService = (function () {
     function WordService(api) {
         this.api = api;
@@ -19,25 +20,18 @@ var WordService = (function () {
             new word_1.Word('4cf957b4-77e4-4906-b0d8-4d5f324fb92', 'tree', 'дерево')];
     }
     WordService.prototype.initNewTest = function () {
-        this.activeWords = [];
-        this.activeIndex = 0;
+        var wordsForTest = [];
         for (var i = 0; i < this.words.length; i++) {
             var word = this.words[i];
-            this.activeWords.push(word.id);
-            this.activeWords.push(word.id);
+            wordsForTest.push(word.id);
+            wordsForTest.push(word.id);
         }
-        util_1.Utils.shuffleArray(this.activeWords);
+        util_1.Utils.shuffleArray(wordsForTest);
+        this.activeTest = new word_test_1.WordTest(this, wordsForTest);
         this.loadData();
     };
     WordService.prototype.getWord = function (id) {
         return this.words.filter(function (word) { return word.id === id; })[0];
-    };
-    WordService.prototype.getActiveWord = function () {
-        return this.getWord(this.activeWords[this.activeIndex]);
-    };
-    WordService.prototype.getNextWord = function () {
-        this.activeIndex++;
-        return this.getActiveWord();
     };
     WordService.prototype.testWord = function (word, text) {
         return new RegExp(text.toLowerCase()).test(word.translation.toLowerCase());
