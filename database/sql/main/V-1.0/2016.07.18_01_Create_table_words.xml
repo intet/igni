@@ -6,6 +6,7 @@
 
     <property name="uuid.type" value="BINARY(16)"/>
     <property name="varchar255.type" value="VARCHAR(255)"/>
+    <property name="int.type" value="INTEGER"/>
 
 
     <changeSet id="Create_table_words" author="Sivodedov Dmitry">
@@ -22,6 +23,10 @@
             </column>
             <column name="translation" type="${varchar255.type}">
             </column>
+            <column name="count_attempts" type="${int.type}"/>
+            <column name="count_success" type="${int.type}"/>
+            <column name="count_fail" type="${int.type}"/>
+            <column name="line_Success" type="${int.type}"/>
         </createTable>
     </changeSet>
 

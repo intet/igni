@@ -4,5 +4,6 @@
   "bearer-only": true,
   "auth-server-url": "http://localhost:42080/auth",
   "ssl-required": "external",
-  "resource": "igni-backend"
+  "resource": "igni-backend",
+  "enable-cors": true
 }

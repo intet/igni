@@ -16,6 +16,7 @@ var WordTableComponent = (function () {
         this.wordService = wordService;
         this.data = [new word_1.Word('4cf957b4-77e4-4906-b0d8-4d5f324fb91', 'word', 'слово'),
             new word_1.Word('4cf957b4-77e4-4906-b0d8-4d5f324fb92', 'tree', 'дерево')];
+        this.columns = [{ prop: 'original' }, { name: 'translation' }];
     }
     WordTableComponent.prototype.add = function () {
         this.wordService.saveWord(this.data[0]);
@@ -23,7 +24,7 @@ var WordTableComponent = (function () {
     WordTableComponent = __decorate([
         core_1.Component({
             selector: 'word-table',
-            template: "\n<button type=\"button\" (click)=\"add()\">Add</button>\n<table class=\"table table-striped\">\n    <thead>\n    <tr>\n        <th style=\"width: 50%\">Word</th>\n        <th style=\"width: 50%\">Translation</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let item of data\">\n        <td>{{item.original}}</td>\n        <td>{{item.translation}}</td>\n    </tr>\n    </tbody>\n</table>\n",
+            template: "\n<button type=\"button\" (click)=\"add()\">Add</button>\n<ngx-datatable [rows]=\"data\" [columns]=\"columns \" class=\"material\"></ngx-datatable>\n",
             providers: [word_service_1.WordService]
         }), 
         __metadata('design:paramtypes', [word_service_1.WordService])

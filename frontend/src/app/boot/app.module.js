@@ -22,6 +22,7 @@ var login_component_1 = require("../security/login.component");
 var word_component_1 = require("../trainer/component/word.component");
 var word_table_component_1 = require("../trainer/component/table/word.table.component");
 var app_routing_module_1 = require("./app-routing.module");
+var ngx_datatable_1 = require("@swimlane/ngx-datatable");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -31,7 +32,8 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 app_routing_module_1.AppRoutingModule,
-                forms_1.FormsModule
+                forms_1.FormsModule,
+                ngx_datatable_1.NgxDatatableModule
             ],
             declarations: [
                 app_component_1.AppComponent,

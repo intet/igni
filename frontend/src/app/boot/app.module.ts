@@ -12,13 +12,15 @@ import {LoginComponent} from "../security/login.component";
 import {WordComponent} from "../trainer/component/word.component";
 import {WordTableComponent} from "../trainer/component/table/word.table.component";
 import {AppRoutingModule} from "./app-routing.module";
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 @NgModule({
     imports: [
         BrowserModule,
         HttpModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        NgxDatatableModule
     ],
     declarations: [
         AppComponent,
