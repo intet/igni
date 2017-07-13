@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var ApiService = (function () {
@@ -21,20 +22,21 @@ var ApiService = (function () {
         });
     };
     ApiService.prototype.post = function (url, params) {
-        var options = new http_1.RequestOptions({
-            search: new http_1.URLSearchParams(params)
-        });
+        var body = JSON.stringify(params);
         var http = this.http;
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/X-www-form-urlencoded');
+        var options = new http_1.RequestOptions({ headers: headers });
         return new Promise(function (resolve, reject) {
-            http.post('api/' + url, null, options).subscribe(function (res) { resolve(res); });
+            http.post('api/' + url, body, options).subscribe(function (res) { resolve(res); });
         });
     };
-    ApiService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], ApiService);
     return ApiService;
 }());
+ApiService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], ApiService);
 exports.ApiService = ApiService;
 /*
 *  for (var key in params){

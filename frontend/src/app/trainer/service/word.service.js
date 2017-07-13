@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var word_1 = require("./word");
 var util_1 = require("./util/util");
@@ -54,11 +55,11 @@ var WordService = (function () {
     };
     WordService.prototype.doSomething = function (Response) {
     };
-    WordService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [api_service_1.ApiService])
-    ], WordService);
     return WordService;
 }());
+WordService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [api_service_1.ApiService])
+], WordService);
 exports.WordService = WordService;
 //# sourceMappingURL=word.service.js.map

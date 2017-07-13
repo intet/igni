@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Word = (function () {
     function Word(id, original, translation) {
         this._countAttempts = 0;

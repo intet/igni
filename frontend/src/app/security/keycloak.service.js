@@ -5,22 +5,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var KeycloakService = (function () {
+var KeycloakService = KeycloakService_1 = (function () {
     function KeycloakService() {
     }
     KeycloakService.init = function () {
         var keycloakAuth = new Keycloak('keycloak.json');
-        KeycloakService.auth.loggedIn = false;
+        KeycloakService_1.auth.loggedIn = false;
         return new Promise(function (resolve, reject) {
             keycloakAuth.init({ onLoad: 'login-required' })
                 .success(function () {
-                KeycloakService.auth.loggedIn = true;
-                KeycloakService.auth.authz = keycloakAuth;
-                KeycloakService.auth.logoutUrl = keycloakAuth.authServerUrl +
+                KeycloakService_1.auth.loggedIn = true;
+                KeycloakService_1.auth.authz = keycloakAuth;
+                KeycloakService_1.auth.logoutUrl = keycloakAuth.authServerUrl +
                     "/realms/igniRealm/protocol/openid-connect/logout?redirect_uri=" +
                     window.location.href;
                 resolve();
@@ -31,16 +29,16 @@ var KeycloakService = (function () {
         });
     };
     KeycloakService.prototype.logout = function () {
-        KeycloakService.auth.loggedIn = false;
-        KeycloakService.auth.authz = null;
-        window.location.href = KeycloakService.auth.logoutUrl;
+        KeycloakService_1.auth.loggedIn = false;
+        KeycloakService_1.auth.authz = null;
+        window.location.href = KeycloakService_1.auth.logoutUrl;
     };
     KeycloakService.prototype.getToken = function () {
         return new Promise(function (resolve, reject) {
-            if (KeycloakService.auth.authz.token) {
-                KeycloakService.auth.authz.updateToken(5)
+            if (KeycloakService_1.auth.authz.token) {
+                KeycloakService_1.auth.authz.updateToken(5)
                     .success(function () {
-                    resolve(KeycloakService.auth.authz.token);
+                    resolve(KeycloakService_1.auth.authz.token);
                 })
                     .error(function () {
                     reject('Failed to refresh token');
@@ -48,12 +46,12 @@ var KeycloakService = (function () {
             }
         });
     };
-    KeycloakService.auth = {};
-    KeycloakService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], KeycloakService);
     return KeycloakService;
 }());
+KeycloakService.auth = {};
+KeycloakService = KeycloakService_1 = __decorate([
+    core_1.Injectable()
+], KeycloakService);
 exports.KeycloakService = KeycloakService;
+var KeycloakService_1;
 //# sourceMappingURL=keycloak.service.js.map

@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var keycloak_service_1 = require("./keycloak.service");
@@ -30,14 +31,14 @@ var LoginComponent = (function () {
     LoginComponent.prototype.doSomething = function (res) {
         console.log(res);
     };
-    LoginComponent = __decorate([
-        core_1.Component({
-            selector: 'login',
-            template: "\n<div>\n    <button type=\"button\" (click)=\"logout()\">Sign Out</button>\n    <button type=\"button\" (click)=\"reloadData()\">Reload</button>\n</div>"
-        }), 
-        __metadata('design:paramtypes', [http_1.Http, keycloak_service_1.KeycloakService, api_service_1.ApiService])
-    ], LoginComponent);
     return LoginComponent;
 }());
+LoginComponent = __decorate([
+    core_1.Component({
+        selector: 'login',
+        template: "\n<div>\n    <button type=\"button\" (click)=\"logout()\">Sign Out</button>\n    <button type=\"button\" (click)=\"reloadData()\">Reload</button>\n</div>"
+    }),
+    __metadata("design:paramtypes", [http_1.Http, keycloak_service_1.KeycloakService, api_service_1.ApiService])
+], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

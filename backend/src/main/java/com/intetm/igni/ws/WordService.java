@@ -8,6 +8,7 @@ import com.intetm.igni.security.Roles;
 import org.slf4j.Logger;
 
 import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -46,6 +47,7 @@ public class WordService {
 
     @Path("/getWords")
     @RolesAllowed(Roles.USER)
+    @PermitAll
     @POST
     public List<Word> getWords(){
         return wordDao.selectAll();
@@ -53,6 +55,7 @@ public class WordService {
 
     @Path("/saveWord")
     @RolesAllowed(Roles.USER)
+    @PermitAll
     @POST
     public void saveWord(@QueryParam("word") Word word){
         wordDao.persist(word);

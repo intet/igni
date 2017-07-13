@@ -13,12 +13,13 @@ export class ApiService {
     }
 
     post(url: string, params?: any):Promise<Response> {
-        let options = new RequestOptions({
-            search:  new URLSearchParams(params)
-        });
+        let body = JSON.stringify(params);
         let http = this.http;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/X-www-form-urlencoded');
+        let options = new RequestOptions({ headers: headers });
         return new Promise(function (resolve, reject) {
-            http.post('api/' + url, null, options).subscribe((res:Response) => {resolve(res)});
+            http.post('api/' + url, body, options).subscribe((res:Response) => {resolve(res)});
         });
     }
 }
