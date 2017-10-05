@@ -34,6 +34,9 @@ public abstract class AbstractDao<Entity, ID> {
     public CriteriaQuery<Entity> createCriteriaQuery() {
         return this.getCriteriaBuilder().createQuery(entryClass);
     }
+    public Query createQuery(String qlString) {
+        return entityManager.createQuery(qlString);
+    }
 
 
     @SuppressWarnings("unchecked")

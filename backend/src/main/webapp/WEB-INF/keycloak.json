@@ -1,8 +1,0 @@
-{
-  "realm": "igniRealm",
-  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsh2Wr8IhcW06BEG6J9V521Mhx1USD93IlFqAlS9MyjGXiccxq56/SBkrJ06hxdC/ufcXqGIaBKOVSdhu6oAgcuZS3pPlE+rCm3Dnu5dWftLEyr8qq0v5RPA0UBXCIYGvDBjA6F2XNO+++Ly5vbiwhuzYxIGuDN1KhiZko4PquOcmCgVCSiLDo6GBbRRBflMN9BmMiZ8KgQRJzFYeKXU3xpe2cosVOAUhGTksJ9v8HsxouG2xmCVba8o4MZRo9rUlgh8KfubB8dBkmprgzWG8zJ1lShXguCb8pTvJcfdmHGJcsQB3G2AuJWtVhe7H2e5W67fhP/4JbxokE7ZgFvavYQIDAQAB",
-  "bearer-only": true,
-  "auth-server-url": "http://localhost/auth",
-  "ssl-required": "external",
-  "resource": "igni-backend"
-}
